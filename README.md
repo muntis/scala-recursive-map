@@ -15,7 +15,7 @@ Partial function signature:
   ((path: Any, value: Any)) => newValue: Any
 ```
 
-To unleash full power of scala matcher path is case class created by "/" operand. Path nodes are strings for map keys and integers for list indexes.
+To unleash full power of scala matcher, path is case class created by "/" operand. Path nodes are strings for map keys and integers for list indexes.
 
 # Example
 
@@ -43,7 +43,7 @@ Partial function will be called with values:
 ("employees" / 1, Map("name" -> "Mary", "surname" -> "Jones", "salary" -> BigDecimal(1700.1)))
 ("employees" / 1 / "name", "Mary")
 ("employees" / 1 / "surname", "Jones")
-("employees" / 1 /"salary", BigDecimal(1700.1))
+("employees" / 1 / "salary", BigDecimal(1700.1))
 ```
 
 Transformations:
