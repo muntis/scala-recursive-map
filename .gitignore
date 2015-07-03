@@ -1,0 +1,28 @@
+# sbt
+target
+lib_managed
+src_managed
+project/boot
+project/plugins/project
+
+# eclipse conf file
+.eclipse
+.settings
+.classpath
+.project
+.manager
+.externalToolBuilders
+.cache
+.metadata
+
+# IntelliJ
+*.eml
+*.iml
+*.ipr
+*.iws
+.idea
+
+# ensime/emacs conf files
+.ensime
+.scala_dependencies
+
