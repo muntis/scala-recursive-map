@@ -99,8 +99,8 @@ Or mix them all in one transformation:
   
   // Result:
   // Map(name -> Sales, employees ->  List(
-  //  Map(Map(name -> bob, surname -> smith, salary -> Now as string: 1000.0, index -> 0)), 
-  //  Map(name -> bob, surname -> smith, salary -> Now as string: 1000.0, index -> 0)
+  //  Map(name -> bob, surname -> smith, salary -> Now as string: 1000.0, index -> 0), 
+  //  Map(name -> mary, surname -> jones, salary -> Now as string: 1700.1, index -> 1)
   // ))  
   
 ```
