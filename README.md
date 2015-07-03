@@ -1,6 +1,23 @@
 # Scala Recursive Map
 Scala utility to recursively traverse and transform json like tree structure made of Lists and Maps
 
+# Installation
+
+There is no maven artifact published jet. One way how to add this project is to add direct dependency to github repo in build file
+
+build.sbt:
+
+```scala
+lazy val p = project.
+  dependsOn(uri("git://github.com/muntis/scala-recursive-map"))
+```
+or project/Build.scala:
+
+```scala
+lazy val p = Project(id = "project" ...).
+  dependsOn(uri("git://github.com/muntis/scala-recursive-map"))
+```
+
 # Usage
 
 ```scala
