@@ -150,18 +150,6 @@ class MapRecursiveExtensionsSpecs extends FlatSpec with Matchers{
       case ("a", _) => "b1"
       case ("c", _) => "d1"
     } should be (Map("a"->"b1", "c"->"d1"))
-  }
-
-  it should "work with java maps and lists" in {
-    import collection.JavaConversions._
-    mapAsJavaMap(Map("a"->"b", "c"->"d")).recursiveMap{
-      case ("a", _) => "b1"
-      case ("c", _) => "d1"
-    } should be (mapAsJavaMap(Map("a"->"b1", "c"->"d1")))
-
-    mapAsJavaMap(Map("a"-> seqAsJavaList(Seq("b", "f")), "c"->"d")).recursiveMap{
-      case ("a" / 1, _) => "f1"
-    } should be (mapAsJavaMap(Map("a"-> seqAsJavaList(Seq("b", "f1")), "c"->"d")))
 
   }
 }
