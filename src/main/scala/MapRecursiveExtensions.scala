@@ -41,7 +41,10 @@ object MapRecursiveExtensions {
         }}
 
       def iterateList(list: List[Any], path: Any):  List[Any] =
-        list.zipWithIndex.map{case (v, i) => transformValue(v,notNullPath(path, i))}
+        list.zipWithIndex.map{case (v, i) => transformValue(v,notNullPath(path, i))match {
+          case _ / _ => sys.error("Position change in list is not supported. TransformationFunction should not return \"key\" / \"value\" on list items")
+          case newValue => newValue
+        }}
 
       if(map == null) null else iterateMap(map, null)
     }

@@ -178,5 +178,12 @@ class MapRecursiveExtensionsSpecs extends FlatSpec with Matchers{
         case ("a" / "b" / "c", v) => /(null, v)
       }
     }.getMessage should be ("Only string keys supported in transformation function result")
+
+
+    intercept[Exception] {
+      Map("a"-> List("b")).recursiveMap{
+        case ("a" / 0 , v) => "a" / v
+      }
+    }.getMessage should be ("Position change in list is not supported. TransformationFunction should not return \"key\" / \"value\" on list items")
   }
 }
