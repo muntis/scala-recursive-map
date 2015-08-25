@@ -161,6 +161,12 @@ class MapRecursiveExtensionsSpecs extends FlatSpec with Matchers{
       case ("a" / "b" / "c", v) => "c2" / v
     } should be (Map("a"->Map("b"->Map("c2"->"d"))))
 
+    Map("a"->Map("b"->Map("c"->"d"))).recursiveMap{
+      case ("a" , v) => "a2" / v
+      case ("a" / "b" , v) => "b2" / v
+      case ("a" / "b" / "c", v) => "c2" / v
+    } should be (Map("a2"->Map("b2"->Map("c2"->"d"))))
+
     intercept[Exception] {
       Map("a"->Map("b"->Map("c"->"d"))).recursiveMap{
         case ("a" / "b" / "c", v) => /(1, v)

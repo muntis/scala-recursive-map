@@ -22,6 +22,10 @@ object MapRecursiveExtensions {
 
       def transformValue(value: Any, path: Any): Any = {
         fullTransform((path, value)) match {
+          case (newKey: String) / (m1: RecursiveMap @unchecked) => newKey / iterateMap(m1, path)
+          case (newKey: String) / (l: List[Any]) => newKey / iterateList(l, path)
+          case (newKey: String) / a => newKey / a
+          case _ / _ => sys.error("Only string keys supported in transformation function result")
           case m1: RecursiveMap @unchecked => iterateMap(m1, path)
           case l: List[Any] => iterateList(l, path)
           case a => a
@@ -33,7 +37,6 @@ object MapRecursiveExtensions {
       def iterateMap(m: RecursiveMap, path: Any): RecursiveMap =
         m.map{case (k, v) => transformValue(v, notNullPath(path, k)) match {
           case (newKey: String) / newValue =>  (newKey, newValue)
-          case _ / _ => sys.error("Only string keys supported in transformation function result")
           case newValue => (k, newValue)
         }}
 
