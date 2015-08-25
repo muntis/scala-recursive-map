@@ -31,7 +31,11 @@ object MapRecursiveExtensions {
       def notNullPath(path: Any, item: Any) = if (path == null) item else new /(path, item)
 
       def iterateMap(m: RecursiveMap, path: Any): RecursiveMap =
-        m.map{case (k, v) => (k, transformValue(v, notNullPath(path, k)))}.toMap
+        m.map{case (k, v) => transformValue(v, notNullPath(path, k)) match {
+          case (newKey: String) / newValue =>  (newKey, newValue)
+          case _ / _ => sys.error("Only string keys supported in transformation function result")
+          case newValue => (k, newValue)
+        }}
 
       def iterateList(list: List[Any], path: Any):  List[Any] =
         list.zipWithIndex.map{case (v, i) => transformValue(v,notNullPath(path, i))}

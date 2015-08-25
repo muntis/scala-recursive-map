@@ -150,6 +150,27 @@ class MapRecursiveExtensionsSpecs extends FlatSpec with Matchers{
       case ("a", _) => "b1"
       case ("c", _) => "d1"
     } should be (Map("a"->"b1", "c"->"d1"))
+  }
 
+  it should "remap keys for map" in {
+    Map("a"->"b", "c"->"d").recursiveMap{
+      case ("a", v) => "f" / v
+    } should be (Map("f"->"b", "c"->"d"))
+
+    Map("a"->Map("b"->Map("c"->"d"))).recursiveMap{
+      case ("a" / "b" / "c", v) => "c2" / v
+    } should be (Map("a"->Map("b"->Map("c2"->"d"))))
+
+    intercept[Exception] {
+      Map("a"->Map("b"->Map("c"->"d"))).recursiveMap{
+        case ("a" / "b" / "c", v) => /(1, v)
+      }
+    }.getMessage should be ("Only string keys supported in transformation function result")
+
+    intercept[Exception] {
+      Map("a"->Map("b"->Map("c"->"d"))).recursiveMap{
+        case ("a" / "b" / "c", v) => /(null, v)
+      }
+    }.getMessage should be ("Only string keys supported in transformation function result")
   }
 }
